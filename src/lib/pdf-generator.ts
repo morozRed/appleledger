@@ -308,7 +308,7 @@ function addProductBreakdown(
     // Currency rows
     for (const [currency, amount] of Object.entries(product.proceedsByCurrency)) {
       tableData.push([
-        { content: `  • ${currency}`, isHeader: false },
+        { content: currency, isHeader: false },
         { content: amount.toFixed(2), isHeader: false },
       ]);
     }
