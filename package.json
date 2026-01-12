@@ -9,6 +9,14 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.16.9"
+    "astro": "^5.16.9",
+    "jspdf": "^4.0.0",
+    "jspdf-autotable": "^5.0.7",
+    "papaparse": "^5.5.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/papaparse": "^5.5.2",
+    "tailwindcss": "^4.1.18"
   }
 }
