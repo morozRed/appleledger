@@ -283,19 +283,27 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </div>
 
-        <!-- Generate Button -->
+        <!-- Generate Buttons -->
         <div class="flex flex-col items-center gap-6">
-          <button id="generate-btn" class="btn-primary flex items-center gap-3 text-lg">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-            </svg>
-            Generate PDF Statement
-          </button>
+          <div class="flex flex-col sm:flex-row items-center gap-4">
+            <button id="generate-btn" class="btn-primary flex items-center gap-3 text-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Download PDF
+            </button>
+            <button id="export-csv-btn" class="px-8 py-4 font-semibold rounded-2xl transition-all duration-300 bg-white border-2 border-border hover:border-primary hover:bg-primary-light/20 text-text-primary flex items-center gap-3 text-lg">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              Export CSV
+            </button>
+          </div>
           <p class="text-sm text-text-muted flex items-center gap-2">
             <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
-            Your statement will download automatically
+            Files download automatically
           </p>
         </div>
       </div>
@@ -346,6 +354,7 @@ import Layout from '../layouts/Layout.astro';
 <script>
   import { parseAppleReport, validateReport, detectDelimiter, formatCurrency, formatDate } from '../lib/parser';
   import { downloadPDF } from '../lib/pdf-generator';
+  import { downloadCSV } from '../lib/csv-exporter';
   import type { ParsedReport } from '../lib/types';
 
   // State
@@ -360,6 +369,7 @@ import Layout from '../layouts/Layout.astro';
   const backBtn = document.getElementById('back-btn')!;
   const errorBackBtn = document.getElementById('error-back-btn')!;
   const generateBtn = document.getElementById('generate-btn')!;
+  const exportCsvBtn = document.getElementById('export-csv-btn')!;
   const developerNameInput = document.getElementById('developer-name') as HTMLInputElement;
 
   // Show/hide states
@@ -520,6 +530,13 @@ import Layout from '../layouts/Layout.astro';
     downloadPDF(currentReport, {
       developerNameOverride: developerName || undefined,
     });
+  });
+
+  exportCsvBtn.addEventListener('click', () => {
+    if (!currentReport) return;
+
+    // Download CSV
+    downloadCSV(currentReport);
   });
 
   // Load saved developer name
