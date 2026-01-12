@@ -56,7 +56,7 @@ export function generateCSV(report: ParsedReport): string {
   lines.push('Date,Country,Product,SKU,Type,Quantity,Proceeds,Currency');
   for (const t of report.transactions) {
     lines.push(
-      `${formatDate(t.transactionDate)},${escapeCSV(t.countryOfSale)},${escapeCSV(t.title)},${escapeCSV(t.sku)},${t.saleOrReturn === 'S' ? 'Sale' : 'Return'},${t.quantity},${t.partnerShare.toFixed(2)},${t.partnerShareCurrency}`
+      `${formatDate(t.transactionDate)},${escapeCSV(t.countryOfSale)},${escapeCSV(t.title)},${escapeCSV(t.sku)},${t.saleOrReturn === 'S' ? 'Sale' : 'Return'},${t.quantity},${t.extendedPartnerShare.toFixed(2)},${t.partnerShareCurrency}`
     );
   }
 
