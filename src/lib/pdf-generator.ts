@@ -275,7 +275,7 @@ function addCountryBreakdown(
 }
 
 /**
- * Add product breakdown as a list with currency details
+ * Add product breakdown table with product headers and currency rows
  */
 function addProductBreakdown(
   doc: jsPDF,
@@ -293,39 +293,55 @@ function addProductBreakdown(
   doc.setTextColor(...COLORS.text);
   doc.setFont('helvetica', 'bold');
   doc.text('Product Breakdown', margin, yPos);
-  yPos += 10;
+  yPos += 8;
+
+  // Build table data with product headers and currency rows
+  const tableData: { content: string; isHeader: boolean }[][] = [];
 
   for (const product of report.summary.byProduct) {
-    // Check if we need a new page for this product
-    const currencyCount = Object.keys(product.proceedsByCurrency).length;
-    const neededHeight = 8 + currencyCount * 5;
-    if (yPos + neededHeight > 270) {
-      doc.addPage();
-      yPos = 20;
-    }
-
-    // Product header: Title (SKU) — X units
-    doc.setFontSize(10);
-    doc.setTextColor(...COLORS.text);
-    doc.setFont('helvetica', 'bold');
     const unitLabel = product.quantity === 1 ? 'unit' : 'units';
-    doc.text(`${product.title} (${product.sku}) — ${product.quantity} ${unitLabel}`, margin, yPos);
-    yPos += 6;
-
-    // Currency breakdown with bullets
-    doc.setFontSize(9);
-    doc.setTextColor(...COLORS.textSecondary);
-    doc.setFont('helvetica', 'normal');
-
+    // Product header row (spans both columns conceptually)
+    tableData.push([
+      { content: `${product.title} (${product.sku}) — ${product.quantity} ${unitLabel}`, isHeader: true },
+      { content: '', isHeader: true },
+    ]);
+    // Currency rows
     for (const [currency, amount] of Object.entries(product.proceedsByCurrency)) {
-      // Right-align the amount within a fixed width
-      const formattedAmount = amount.toFixed(2).padStart(10, ' ');
-      doc.text(`    • ${currency}  ${formattedAmount}`, margin, yPos);
-      yPos += 5;
+      tableData.push([
+        { content: `  • ${currency}`, isHeader: false },
+        { content: formatCurrency(amount, currency), isHeader: false },
+      ]);
     }
-
-    yPos += 4; // Space between products
   }
+
+  autoTable(doc, {
+    startY: yPos,
+    head: [['Product / Currency', 'Net Proceeds']],
+    body: tableData.map((row) => [row[0].content, row[1].content]),
+    margin: { left: margin, right: margin },
+    headStyles: {
+      fillColor: COLORS.background,
+      textColor: COLORS.textSecondary,
+      fontStyle: 'bold',
+      fontSize: 9,
+    },
+    bodyStyles: {
+      textColor: COLORS.text,
+      fontSize: 10,
+    },
+    columnStyles: {
+      0: { cellWidth: 120 },
+      1: { halign: 'right' },
+    },
+    didParseCell: (data) => {
+      if (data.section === 'body' && tableData[data.row.index]?.[0]?.isHeader) {
+        data.cell.styles.fontStyle = 'bold';
+        data.cell.styles.fillColor = COLORS.background;
+      }
+    },
+  });
+
+  yPos = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 10;
 
   return yPos;
 }
