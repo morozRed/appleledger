@@ -275,7 +275,7 @@ function addCountryBreakdown(
 }
 
 /**
- * Add product breakdown table
+ * Add product breakdown as a list with currency details
  */
 function addProductBreakdown(
   doc: jsPDF,
@@ -293,40 +293,39 @@ function addProductBreakdown(
   doc.setTextColor(...COLORS.text);
   doc.setFont('helvetica', 'bold');
   doc.text('Product Breakdown', margin, yPos);
-  yPos += 8;
+  yPos += 10;
 
-  const productData = report.summary.byProduct.map((p) => {
-    // Bullet point per currency for clear multi-currency display
-    const proceedsStr = Object.entries(p.proceedsByCurrency)
-      .map(([currency, amount]) => `• ${formatCurrency(amount, currency)}`)
-      .join('\n');
-    return [p.title, p.sku, p.quantity.toString(), proceedsStr];
-  });
+  for (const product of report.summary.byProduct) {
+    // Check if we need a new page for this product
+    const currencyCount = Object.keys(product.proceedsByCurrency).length;
+    const neededHeight = 8 + currencyCount * 5;
+    if (yPos + neededHeight > 270) {
+      doc.addPage();
+      yPos = 20;
+    }
 
-  autoTable(doc, {
-    startY: yPos,
-    head: [['Product', 'SKU', 'Units', 'Net Proceeds']],
-    body: productData,
-    margin: { left: margin, right: margin },
-    headStyles: {
-      fillColor: COLORS.background,
-      textColor: COLORS.textSecondary,
-      fontStyle: 'bold',
-      fontSize: 9,
-    },
-    bodyStyles: {
-      textColor: COLORS.text,
-      fontSize: 10,
-    },
-    columnStyles: {
-      0: { cellWidth: 50 },
-      1: { cellWidth: 40 },
-      2: { cellWidth: 25, halign: 'center' },
-      3: { halign: 'right' },
-    },
-  });
+    // Product header: Title (SKU) — X units
+    doc.setFontSize(10);
+    doc.setTextColor(...COLORS.text);
+    doc.setFont('helvetica', 'bold');
+    const unitLabel = product.quantity === 1 ? 'unit' : 'units';
+    doc.text(`${product.title} (${product.sku}) — ${product.quantity} ${unitLabel}`, margin, yPos);
+    yPos += 6;
 
-  yPos = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 10;
+    // Currency breakdown with bullets
+    doc.setFontSize(9);
+    doc.setTextColor(...COLORS.textSecondary);
+    doc.setFont('helvetica', 'normal');
+
+    for (const [currency, amount] of Object.entries(product.proceedsByCurrency)) {
+      // Right-align the amount within a fixed width
+      const formattedAmount = amount.toFixed(2).padStart(10, ' ');
+      doc.text(`    • ${currency}  ${formattedAmount}`, margin, yPos);
+      yPos += 5;
+    }
+
+    yPos += 4; // Space between products
+  }
 
   return yPos;
 }
