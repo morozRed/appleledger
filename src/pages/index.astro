@@ -48,115 +48,132 @@ import Layout from '../layouts/Layout.astro';
     <main class="max-w-6xl mx-auto px-6 py-16 relative z-10">
       <!-- Upload State -->
       <div id="upload-state">
-        <!-- Hero -->
-        <div class="text-center mb-16 opacity-0 animate-fade-in-up">
-          <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-border bg-white/80 text-sm text-text-secondary shadow-sm">
-            <span class="flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-success opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
-            </span>
-            100% Client-Side Processing
-          </div>
+        <!-- Hero Row: Text Left + Upload Right -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+          <!-- Left: Hero Text -->
+          <div class="opacity-0 animate-fade-in-up">
+            <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-border bg-white/80 text-sm text-text-secondary shadow-sm">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+              </span>
+              100% Client-Side
+            </div>
 
-          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold text-text-primary mb-6 tracking-tight leading-[1.1]">
-            Turn Apple Reports into<br/>
-            <span class="gradient-text">Accountant-Ready</span> PDFs
-          </h1>
+            <h1 class="font-display text-4xl md:text-5xl lg:text-6xl font-extrabold text-text-primary mb-6 tracking-tight leading-[1.1]">
+              Turn Apple Reports into
+              <span class="gradient-text">Accountant-Ready</span> PDFs
+            </h1>
 
-          <p class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
-            Upload your App Store Connect financial report and instantly generate
-            a clean, professional statement. No sign-up. No server uploads.
-          </p>
-        </div>
+            <p class="text-lg text-text-secondary leading-relaxed mb-8">
+              Upload your App Store Connect financial report and instantly generate
+              a clean, professional statement. No sign-up. No server uploads.
+            </p>
 
-        <!-- File Upload Area -->
-        <div class="max-w-2xl mx-auto opacity-0 animate-fade-in-up stagger-2">
-          <div
-            id="drop-zone"
-            class="gradient-border cursor-pointer group"
-          >
-            <div class="relative bg-white rounded-3xl p-12 text-center transition-all duration-300 group-hover:bg-primary-light/20">
-              <div class="flex flex-col items-center gap-6">
-                <!-- Icon -->
-                <div class="relative">
-                  <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-xl shadow-primary/30 group-hover:scale-110 transition-transform duration-300">
-                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                    </svg>
-                  </div>
-                  <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white text-xs font-bold shadow-lg">
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
-                    </svg>
-                  </div>
-                </div>
-
-                <!-- Text -->
-                <div>
-                  <p class="text-xl font-semibold text-text-primary mb-2">
-                    Drop your financial report here
-                  </p>
-                  <p class="text-text-secondary">
-                    or <span class="text-primary font-semibold group-hover:underline">click to browse</span>
-                  </p>
-                </div>
-
-                <!-- File type badge -->
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-border-light rounded-xl">
-                  <svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                  </svg>
-                  <span class="text-sm text-text-secondary font-medium">.txt files from App Store Connect</span>
-                </div>
+            <!-- Quick stats -->
+            <div class="flex items-center gap-6 text-sm text-text-muted">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>Free forever</span>
               </div>
-              <input
-                type="file"
-                id="file-input"
-                accept=".txt"
-                class="hidden"
-              />
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-success" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg>
+                <span>No sign-up</span>
+              </div>
             </div>
           </div>
 
-          <!-- Privacy Note -->
-          <div class="flex items-center justify-center gap-2 mt-8 text-sm text-text-muted">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
-            </svg>
-            <span>Your data never leaves your browser</span>
+          <!-- Right: Upload Zone -->
+          <div class="opacity-0 animate-fade-in-up stagger-2">
+            <div
+              id="drop-zone"
+              class="cursor-pointer group"
+            >
+              <div class="relative bg-white rounded-2xl border-2 border-dashed border-border hover:border-primary p-10 lg:p-12 text-center transition-all duration-300 hover:bg-primary-light/10 hover:shadow-xl hover:shadow-primary/10">
+                <div class="flex flex-col items-center gap-5">
+                  <!-- Icon -->
+                  <div class="relative">
+                    <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-xl shadow-primary/30 group-hover:scale-110 transition-transform duration-300">
+                      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                      </svg>
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white shadow-lg">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <!-- Text -->
+                  <div>
+                    <p class="text-xl font-semibold text-text-primary mb-2">
+                      Drop your report here
+                    </p>
+                    <p class="text-text-secondary">
+                      or <span class="text-primary font-semibold group-hover:underline">click to browse</span>
+                    </p>
+                  </div>
+
+                  <!-- File type badge -->
+                  <div class="inline-flex items-center gap-2 px-4 py-2 bg-border-light/70 rounded-xl">
+                    <svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    <span class="text-sm text-text-secondary font-medium">.txt from App Store Connect</span>
+                  </div>
+                </div>
+                <input
+                  type="file"
+                  id="file-input"
+                  accept=".txt"
+                  class="hidden"
+                />
+              </div>
+            </div>
           </div>
         </div>
 
-        <!-- Features -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 opacity-0 animate-fade-in-up stagger-3">
-          <div class="group p-6 rounded-2xl bg-white/60 border border-border/50 card-hover">
-            <div class="w-12 h-12 rounded-xl bg-primary-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+        <!-- Features Row -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 opacity-0 animate-fade-in-up stagger-3">
+          <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white/70 border border-border/50 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-success-light flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-display font-semibold text-text-primary mb-1">100% Private</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Your financial data never leaves your browser. No uploads, no tracking.</p>
+            </div>
+          </div>
+
+          <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white/70 border border-border/50 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary-light flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
               <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
             </div>
-            <h3 class="font-display font-semibold text-text-primary mb-2">Instant Processing</h3>
-            <p class="text-sm text-text-secondary leading-relaxed">Parse and generate PDFs in milliseconds, entirely in your browser.</p>
-          </div>
-
-          <div class="group p-6 rounded-2xl bg-white/60 border border-border/50 card-hover">
-            <div class="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
+            <div>
+              <h3 class="font-display font-semibold text-text-primary mb-1">Instant Processing</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Parse reports and generate PDFs in milliseconds, entirely local.</p>
             </div>
-            <h3 class="font-display font-semibold text-text-primary mb-2">100% Private</h3>
-            <p class="text-sm text-text-secondary leading-relaxed">No uploads, no tracking. Your financial data stays on your device.</p>
           </div>
 
-          <div class="group p-6 rounded-2xl bg-white/60 border border-border/50 card-hover">
-            <div class="w-12 h-12 rounded-xl bg-success-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-              <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="group flex items-start gap-4 p-5 rounded-2xl bg-white/70 border border-border/50 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
               </svg>
             </div>
-            <h3 class="font-display font-semibold text-text-primary mb-2">Accountant-Ready</h3>
-            <p class="text-sm text-text-secondary leading-relaxed">Professional PDFs with all the breakdowns your accountant needs.</p>
+            <div>
+              <h3 class="font-display font-semibold text-text-primary mb-1">Accountant-Ready</h3>
+              <p class="text-sm text-text-secondary leading-relaxed">Professional PDFs with all the breakdowns your accountant needs.</p>
+            </div>
           </div>
         </div>
       </div>
