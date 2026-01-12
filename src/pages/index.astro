@@ -1,11 +1,387 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+  <div class="min-h-screen bg-background">
+    <!-- Header -->
+    <header class="border-b border-border bg-white/80 backdrop-blur-sm sticky top-0 z-10">
+      <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+            <polyline points="10 9 9 9 8 9"/>
+          </svg>
+          <span class="font-semibold text-text-primary">AppStore Ledger</span>
+        </div>
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-text-secondary hover:text-text-primary transition-colors"
+        >
+          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+          </svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-5xl mx-auto px-4 py-12">
+      <!-- Upload State -->
+      <div id="upload-state">
+        <!-- Hero -->
+        <div class="text-center mb-12">
+          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
+            Turn Apple Financial Reports<br/>
+            into <span class="text-primary">Accountant-Ready</span> Statements
+          </h1>
+          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
+            Upload your App Store Connect financial report and get a clean, professional PDF statement.
+            No sign-up required. 100% processed in your browser.
+          </p>
+        </div>
+
+        <!-- Trust Badge -->
+        <div class="flex justify-center mb-8">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-success-light text-success rounded-full text-sm font-medium">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            </svg>
+            <span>100% Client-Side Processing</span>
+          </div>
+        </div>
+
+        <!-- File Upload Area -->
+        <div
+          id="drop-zone"
+          class="border-2 border-dashed border-border rounded-2xl p-12 text-center bg-white hover:border-primary hover:bg-primary-light/20 transition-all cursor-pointer"
+        >
+          <div class="flex flex-col items-center gap-4">
+            <div class="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center">
+              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+              </svg>
+            </div>
+            <div>
+              <p class="text-lg font-medium text-text-primary mb-1">
+                Drop your Apple financial report here
+              </p>
+              <p class="text-text-secondary">
+                or <span class="text-primary font-medium">click to browse</span>
+              </p>
+            </div>
+            <p class="text-sm text-text-secondary">
+              Supports TXT, TSV, and CSV files from App Store Connect
+            </p>
+          </div>
+          <input
+            type="file"
+            id="file-input"
+            accept=".txt,.tsv,.csv"
+            class="hidden"
+          />
+        </div>
+
+        <!-- Privacy Note -->
+        <p class="text-center text-sm text-text-secondary mt-6">
+          Your data never leaves your browser. We don't store, upload, or process your files on any server.
+        </p>
+      </div>
+
+      <!-- Preview State -->
+      <div id="preview-state" class="hidden">
+        <div class="flex items-center justify-between mb-8">
+          <h2 class="text-2xl font-bold text-text-primary">Report Preview</h2>
+          <button
+            id="back-btn"
+            class="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
+          >
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+            Upload different file
+          </button>
+        </div>
+
+        <!-- Developer Name Input -->
+        <div class="bg-white rounded-xl border border-border p-6 mb-6">
+          <label class="block text-sm font-medium text-text-secondary mb-2">Developer Name</label>
+          <input
+            type="text"
+            id="developer-name"
+            class="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+            placeholder="Enter developer or company name"
+          />
+          <p class="text-xs text-text-secondary mt-2">This will appear on the PDF statement header</p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div class="bg-white rounded-xl border border-border p-6">
+            <p class="text-sm text-text-secondary mb-1">Reporting Period</p>
+            <p id="period-display" class="text-lg font-semibold text-text-primary">-</p>
+          </div>
+          <div class="bg-white rounded-xl border border-border p-6">
+            <p class="text-sm text-text-secondary mb-1">Total Transactions</p>
+            <p id="transactions-display" class="text-lg font-semibold text-text-primary">-</p>
+          </div>
+          <div class="bg-white rounded-xl border border-border p-6">
+            <p class="text-sm text-text-secondary mb-1">Currencies</p>
+            <p id="currencies-display" class="text-lg font-semibold text-text-primary">-</p>
+          </div>
+        </div>
+
+        <!-- Currency Breakdown -->
+        <div class="bg-white rounded-xl border border-border p-6 mb-6">
+          <h3 class="text-lg font-semibold text-text-primary mb-4">Net Proceeds by Currency</h3>
+          <div id="currency-breakdown" class="space-y-3">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+
+        <!-- Country Breakdown -->
+        <div class="bg-white rounded-xl border border-border p-6 mb-6">
+          <h3 class="text-lg font-semibold text-text-primary mb-4">Sales by Country</h3>
+          <div id="country-breakdown" class="overflow-x-auto">
+            <table class="w-full text-left">
+              <thead>
+                <tr class="border-b border-border">
+                  <th class="pb-3 text-sm font-medium text-text-secondary">Country</th>
+                  <th class="pb-3 text-sm font-medium text-text-secondary">Currency</th>
+                  <th class="pb-3 text-sm font-medium text-text-secondary text-center">Units</th>
+                  <th class="pb-3 text-sm font-medium text-text-secondary text-right">Net Proceeds</th>
+                </tr>
+              </thead>
+              <tbody id="country-table-body">
+                <!-- Filled by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Generate Button -->
+        <div class="flex flex-col items-center gap-4">
+          <button
+            id="generate-btn"
+            class="px-8 py-4 bg-primary text-white font-semibold rounded-xl shadow-lg hover:bg-primary-hover hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+          >
+            Generate PDF Statement
+          </button>
+          <p class="text-sm text-text-secondary">
+            Your accountant-ready statement will be downloaded automatically
+          </p>
+        </div>
+      </div>
+
+      <!-- Error State -->
+      <div id="error-state" class="hidden">
+        <div class="bg-error-light border border-error rounded-xl p-8 text-center">
+          <div class="w-12 h-12 rounded-full bg-error/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+          </div>
+          <h3 id="error-title" class="text-lg font-semibold text-error mb-2">Error</h3>
+          <p id="error-message" class="text-text-secondary mb-6">Something went wrong</p>
+          <button
+            id="error-back-btn"
+            class="px-6 py-2 bg-white border border-border rounded-lg text-text-primary hover:bg-surface transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-border bg-white mt-auto">
+      <div class="max-w-5xl mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-sm text-text-secondary">
+            AppStore Ledger - Free tool for developers
+          </p>
+          <p class="text-sm text-text-secondary">
+            This tool does not calculate taxes. Not affiliated with Apple Inc.
+          </p>
+        </div>
+      </div>
+    </footer>
+  </div>
 </Layout>
+
+<script>
+  import { parseAppleReport, validateReport, detectDelimiter, formatCurrency, formatDate } from '../lib/parser';
+  import { downloadPDF } from '../lib/pdf-generator';
+  import type { ParsedReport } from '../lib/types';
+
+  // State
+  let currentReport: ParsedReport | null = null;
+
+  // DOM Elements
+  const uploadState = document.getElementById('upload-state')!;
+  const previewState = document.getElementById('preview-state')!;
+  const errorState = document.getElementById('error-state')!;
+  const dropZone = document.getElementById('drop-zone')!;
+  const fileInput = document.getElementById('file-input') as HTMLInputElement;
+  const backBtn = document.getElementById('back-btn')!;
+  const errorBackBtn = document.getElementById('error-back-btn')!;
+  const generateBtn = document.getElementById('generate-btn')!;
+  const developerNameInput = document.getElementById('developer-name') as HTMLInputElement;
+
+  // Show/hide states
+  function showState(state: 'upload' | 'preview' | 'error') {
+    uploadState.classList.toggle('hidden', state !== 'upload');
+    previewState.classList.toggle('hidden', state !== 'preview');
+    errorState.classList.toggle('hidden', state !== 'error');
+  }
+
+  function showError(title: string, message: string) {
+    document.getElementById('error-title')!.textContent = title;
+    document.getElementById('error-message')!.textContent = message;
+    showState('error');
+  }
+
+  // File handling
+  function handleFile(file: File) {
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string;
+        const delimiter = detectDelimiter(content);
+
+        // Validate first
+        const validation = validateReport(content, delimiter);
+        if (!validation.valid) {
+          showError('Invalid File Format', validation.errors.join('. '));
+          return;
+        }
+
+        // Parse the report
+        currentReport = parseAppleReport(content);
+
+        // Update preview UI
+        updatePreview(currentReport);
+        showState('preview');
+      } catch (err) {
+        showError('Parsing Error', err instanceof Error ? err.message : 'Failed to parse the file');
+      }
+    };
+
+    reader.onerror = () => {
+      showError('Read Error', 'Failed to read the file');
+    };
+
+    reader.readAsText(file);
+  }
+
+  function updatePreview(report: ParsedReport) {
+    // Developer name
+    developerNameInput.value = report.metadata.vendorName || '';
+
+    // Save to localStorage
+    const savedName = localStorage.getItem('developerName');
+    if (savedName && !report.metadata.vendorName) {
+      developerNameInput.value = savedName;
+    }
+
+    // Period
+    const startDate = formatDate(report.metadata.startDate);
+    const endDate = formatDate(report.metadata.endDate);
+    document.getElementById('period-display')!.textContent = `${startDate} to ${endDate}`;
+
+    // Transactions
+    document.getElementById('transactions-display')!.textContent =
+      report.summary.totalTransactions.toString();
+
+    // Currencies
+    document.getElementById('currencies-display')!.textContent =
+      report.summary.byCurrency.map(c => c.currency).join(', ');
+
+    // Currency breakdown
+    const currencyBreakdown = document.getElementById('currency-breakdown')!;
+    currencyBreakdown.innerHTML = report.summary.byCurrency.map(c => `
+      <div class="flex items-center justify-between py-2 border-b border-border last:border-0">
+        <span class="font-medium text-text-primary">${c.currency}</span>
+        <span class="text-lg font-semibold text-primary">${formatCurrency(c.totalProceeds, c.currency)}</span>
+      </div>
+    `).join('');
+
+    // Country breakdown table
+    const countryTableBody = document.getElementById('country-table-body')!;
+    countryTableBody.innerHTML = report.summary.byCountry.map(c => `
+      <tr class="border-b border-border last:border-0">
+        <td class="py-3 text-text-primary">${c.countryOfSale}</td>
+        <td class="py-3 text-text-secondary">${c.currency}</td>
+        <td class="py-3 text-text-primary text-center">${c.quantity}</td>
+        <td class="py-3 text-text-primary text-right font-medium">${formatCurrency(c.proceeds, c.currency)}</td>
+      </tr>
+    `).join('');
+  }
+
+  // Event listeners
+  dropZone.addEventListener('click', () => fileInput.click());
+
+  dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('border-primary', 'bg-primary-light/20');
+  });
+
+  dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('border-primary', 'bg-primary-light/20');
+  });
+
+  dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('border-primary', 'bg-primary-light/20');
+
+    const file = e.dataTransfer?.files[0];
+    if (file) {
+      handleFile(file);
+    }
+  });
+
+  fileInput.addEventListener('change', () => {
+    const file = fileInput.files?.[0];
+    if (file) {
+      handleFile(file);
+    }
+  });
+
+  backBtn.addEventListener('click', () => {
+    currentReport = null;
+    fileInput.value = '';
+    showState('upload');
+  });
+
+  errorBackBtn.addEventListener('click', () => {
+    fileInput.value = '';
+    showState('upload');
+  });
+
+  generateBtn.addEventListener('click', () => {
+    if (!currentReport) return;
+
+    // Save developer name preference
+    const developerName = developerNameInput.value.trim();
+    if (developerName) {
+      localStorage.setItem('developerName', developerName);
+    }
+
+    // Generate and download PDF
+    downloadPDF(currentReport, {
+      developerNameOverride: developerName || undefined,
+    });
+  });
+
+  // Load saved developer name
+  const savedDeveloperName = localStorage.getItem('developerName');
+  if (savedDeveloperName) {
+    developerNameInput.value = savedDeveloperName;
+  }
+</script>
