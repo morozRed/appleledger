@@ -3,158 +3,260 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-  <div class="min-h-screen bg-background">
+  <div class="min-h-screen bg-background relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+      <!-- Gradient orbs -->
+      <div class="absolute top-[-20%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-br from-primary/10 to-accent/5 blur-3xl animate-float"></div>
+      <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-accent/8 to-primary/5 blur-3xl animate-float" style="animation-delay: -3s;"></div>
+      <!-- Grid pattern -->
+      <div class="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.02)_1px,transparent_1px)] bg-[size:60px_60px]"></div>
+    </div>
+
     <!-- Header -->
-    <header class="border-b border-border bg-white/80 backdrop-blur-sm sticky top-0 z-10">
-      <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-        <div class="flex items-center gap-2">
-          <svg class="w-8 h-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-          <span class="font-semibold text-text-primary">AppStore Ledger</span>
+    <header class="glass-strong border-b border-border/50 sticky top-0 z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-lg shadow-primary/25">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-display font-bold text-lg text-text-primary tracking-tight">AppStore Ledger</span>
+            <span class="hidden sm:inline-block ml-2 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wider bg-success-light text-success rounded-full">Free</span>
+          </div>
         </div>
         <a
-          href="https://github.com"
+          href="https://github.com/morozRed"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-text-secondary hover:text-text-primary transition-colors"
+          class="flex items-center gap-2 px-4 py-2 rounded-xl text-text-secondary hover:text-text-primary hover:bg-border-light/50 transition-all duration-200"
         >
-          <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
           </svg>
+          <span class="hidden sm:inline text-sm font-medium">GitHub</span>
         </a>
       </div>
     </header>
 
     <!-- Main Content -->
-    <main class="max-w-5xl mx-auto px-4 py-12">
+    <main class="max-w-6xl mx-auto px-6 py-16 relative z-10">
       <!-- Upload State -->
       <div id="upload-state">
         <!-- Hero -->
-        <div class="text-center mb-12">
-          <h1 class="text-4xl md:text-5xl font-bold text-text-primary mb-4">
-            Turn Apple Financial Reports<br/>
-            into <span class="text-primary">Accountant-Ready</span> Statements
+        <div class="text-center mb-16 opacity-0 animate-fade-in-up">
+          <div class="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full border border-border bg-white/80 text-sm text-text-secondary shadow-sm">
+            <span class="flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-success opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
+            </span>
+            100% Client-Side Processing
+          </div>
+
+          <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold text-text-primary mb-6 tracking-tight leading-[1.1]">
+            Turn Apple Reports into<br/>
+            <span class="gradient-text">Accountant-Ready</span> PDFs
           </h1>
-          <p class="text-lg text-text-secondary max-w-2xl mx-auto">
-            Upload your App Store Connect financial report and get a clean, professional PDF statement.
-            No sign-up required. 100% processed in your browser.
+
+          <p class="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
+            Upload your App Store Connect financial report and instantly generate
+            a clean, professional statement. No sign-up. No server uploads.
           </p>
         </div>
 
-        <!-- Trust Badge -->
-        <div class="flex justify-center mb-8">
-          <div class="inline-flex items-center gap-2 px-4 py-2 bg-success-light text-success rounded-full text-sm font-medium">
+        <!-- File Upload Area -->
+        <div class="max-w-2xl mx-auto opacity-0 animate-fade-in-up stagger-2">
+          <div
+            id="drop-zone"
+            class="gradient-border cursor-pointer group"
+          >
+            <div class="relative bg-white rounded-3xl p-12 text-center transition-all duration-300 group-hover:bg-primary-light/20">
+              <div class="flex flex-col items-center gap-6">
+                <!-- Icon -->
+                <div class="relative">
+                  <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-xl shadow-primary/30 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                    </svg>
+                  </div>
+                  <div class="absolute -bottom-1 -right-1 w-6 h-6 rounded-full bg-accent flex items-center justify-center text-white text-xs font-bold shadow-lg">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 4v16m8-8H4"/>
+                    </svg>
+                  </div>
+                </div>
+
+                <!-- Text -->
+                <div>
+                  <p class="text-xl font-semibold text-text-primary mb-2">
+                    Drop your financial report here
+                  </p>
+                  <p class="text-text-secondary">
+                    or <span class="text-primary font-semibold group-hover:underline">click to browse</span>
+                  </p>
+                </div>
+
+                <!-- File type badge -->
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-border-light rounded-xl">
+                  <svg class="w-4 h-4 text-text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                  <span class="text-sm text-text-secondary font-medium">.txt files from App Store Connect</span>
+                </div>
+              </div>
+              <input
+                type="file"
+                id="file-input"
+                accept=".txt"
+                class="hidden"
+              />
+            </div>
+          </div>
+
+          <!-- Privacy Note -->
+          <div class="flex items-center justify-center gap-2 mt-8 text-sm text-text-muted">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
-            <span>100% Client-Side Processing</span>
+            <span>Your data never leaves your browser</span>
           </div>
         </div>
 
-        <!-- File Upload Area -->
-        <div
-          id="drop-zone"
-          class="border-2 border-dashed border-border rounded-2xl p-12 text-center bg-white hover:border-primary hover:bg-primary-light/20 transition-all cursor-pointer"
-        >
-          <div class="flex flex-col items-center gap-4">
-            <div class="w-16 h-16 rounded-full bg-primary-light flex items-center justify-center">
-              <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+        <!-- Features -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 opacity-0 animate-fade-in-up stagger-3">
+          <div class="group p-6 rounded-2xl bg-white/60 border border-border/50 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-primary-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
               </svg>
             </div>
-            <div>
-              <p class="text-lg font-medium text-text-primary mb-1">
-                Drop your Apple financial report here
-              </p>
-              <p class="text-text-secondary">
-                or <span class="text-primary font-medium">click to browse</span>
-              </p>
-            </div>
-            <p class="text-sm text-text-secondary">
-              Supports TXT files from App Store Connect
-            </p>
+            <h3 class="font-display font-semibold text-text-primary mb-2">Instant Processing</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Parse and generate PDFs in milliseconds, entirely in your browser.</p>
           </div>
-          <input
-            type="file"
-            id="file-input"
-            accept=".txt"
-            class="hidden"
-          />
-        </div>
 
-        <!-- Privacy Note -->
-        <p class="text-center text-sm text-text-secondary mt-6">
-          Your data never leaves your browser. We don't store, upload, or process your files on any server.
-        </p>
+          <div class="group p-6 rounded-2xl bg-white/60 border border-border/50 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-accent-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <h3 class="font-display font-semibold text-text-primary mb-2">100% Private</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">No uploads, no tracking. Your financial data stays on your device.</p>
+          </div>
+
+          <div class="group p-6 rounded-2xl bg-white/60 border border-border/50 card-hover">
+            <div class="w-12 h-12 rounded-xl bg-success-light flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <h3 class="font-display font-semibold text-text-primary mb-2">Accountant-Ready</h3>
+            <p class="text-sm text-text-secondary leading-relaxed">Professional PDFs with all the breakdowns your accountant needs.</p>
+          </div>
+        </div>
       </div>
 
       <!-- Preview State -->
       <div id="preview-state" class="hidden">
-        <div class="flex items-center justify-between mb-8">
-          <h2 class="text-2xl font-bold text-text-primary">Report Preview</h2>
-          <button
-            id="back-btn"
-            class="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
-            </svg>
-            Upload different file
-          </button>
+        <div class="flex items-center justify-between mb-10">
+          <div>
+            <button
+              id="back-btn"
+              class="inline-flex items-center gap-2 text-text-secondary hover:text-primary transition-colors mb-2"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+              <span class="text-sm font-medium">Upload different file</span>
+            </button>
+            <h2 class="font-display text-3xl font-bold text-text-primary">Report Preview</h2>
+          </div>
         </div>
 
         <!-- Developer Name Input -->
-        <div class="bg-white rounded-xl border border-border p-6 mb-6">
-          <label class="block text-sm font-medium text-text-secondary mb-2">Developer Name</label>
+        <div class="bg-white rounded-2xl border border-border p-6 mb-8 shadow-sm">
+          <label class="block text-sm font-semibold text-text-primary mb-3">Developer / Company Name</label>
           <input
             type="text"
             id="developer-name"
-            class="w-full px-4 py-2 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-            placeholder="Enter developer or company name"
+            class="input-field"
+            placeholder="Enter name for the statement header"
           />
-          <p class="text-xs text-text-secondary mt-2">This will appear on the PDF statement header</p>
+          <p class="text-xs text-text-muted mt-3 flex items-center gap-1.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            This will appear in the PDF header
+          </p>
         </div>
 
         <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-          <div class="bg-white rounded-xl border border-border p-6">
-            <p class="text-sm text-text-secondary mb-1">Reporting Period</p>
-            <p id="period-display" class="text-lg font-semibold text-text-primary">-</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+          <div class="bg-white rounded-2xl border border-border p-6 shadow-sm card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-primary-light flex items-center justify-center">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+              </div>
+              <p class="text-sm font-medium text-text-secondary">Reporting Period</p>
+            </div>
+            <p id="period-display" class="text-xl font-bold text-text-primary font-display">-</p>
           </div>
-          <div class="bg-white rounded-xl border border-border p-6">
-            <p class="text-sm text-text-secondary mb-1">Total Transactions</p>
-            <p id="transactions-display" class="text-lg font-semibold text-text-primary">-</p>
+          <div class="bg-white rounded-2xl border border-border p-6 shadow-sm card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-accent-light flex items-center justify-center">
+                <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                </svg>
+              </div>
+              <p class="text-sm font-medium text-text-secondary">Transactions</p>
+            </div>
+            <p id="transactions-display" class="text-xl font-bold text-text-primary font-display">-</p>
           </div>
-          <div class="bg-white rounded-xl border border-border p-6">
-            <p class="text-sm text-text-secondary mb-1">Currencies</p>
-            <p id="currencies-display" class="text-lg font-semibold text-text-primary">-</p>
+          <div class="bg-white rounded-2xl border border-border p-6 shadow-sm card-hover">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-success-light flex items-center justify-center">
+                <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <p class="text-sm font-medium text-text-secondary">Currencies</p>
+            </div>
+            <p id="currencies-display" class="text-xl font-bold text-text-primary font-display">-</p>
           </div>
         </div>
 
         <!-- Currency Breakdown -->
-        <div class="bg-white rounded-xl border border-border p-6 mb-6">
-          <h3 class="text-lg font-semibold text-text-primary mb-4">Net Proceeds by Currency</h3>
-          <div id="currency-breakdown" class="space-y-3">
+        <div class="bg-white rounded-2xl border border-border p-6 mb-8 shadow-sm">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-6 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-gradient-to-b from-primary to-accent rounded-full"></span>
+            Net Proceeds by Currency
+          </h3>
+          <div id="currency-breakdown" class="space-y-4">
             <!-- Filled by JS -->
           </div>
         </div>
 
         <!-- Country Breakdown -->
-        <div class="bg-white rounded-xl border border-border p-6 mb-6">
-          <h3 class="text-lg font-semibold text-text-primary mb-4">Sales by Country</h3>
+        <div class="bg-white rounded-2xl border border-border p-6 mb-10 shadow-sm">
+          <h3 class="font-display text-lg font-bold text-text-primary mb-6 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-gradient-to-b from-accent to-success rounded-full"></span>
+            Sales by Country
+          </h3>
           <div id="country-breakdown" class="overflow-x-auto">
             <table class="w-full text-left">
               <thead>
-                <tr class="border-b border-border">
-                  <th class="pb-3 text-sm font-medium text-text-secondary">Country</th>
-                  <th class="pb-3 text-sm font-medium text-text-secondary">Currency</th>
-                  <th class="pb-3 text-sm font-medium text-text-secondary text-center">Units</th>
-                  <th class="pb-3 text-sm font-medium text-text-secondary text-right">Net Proceeds</th>
+                <tr class="border-b-2 border-border-light">
+                  <th class="pb-4 text-xs font-semibold text-text-muted uppercase tracking-wider">Country</th>
+                  <th class="pb-4 text-xs font-semibold text-text-muted uppercase tracking-wider">Currency</th>
+                  <th class="pb-4 text-xs font-semibold text-text-muted uppercase tracking-wider text-center">Units</th>
+                  <th class="pb-4 text-xs font-semibold text-text-muted uppercase tracking-wider text-right">Net Proceeds</th>
                 </tr>
               </thead>
               <tbody id="country-table-body">
@@ -165,47 +267,57 @@ import Layout from '../layouts/Layout.astro';
         </div>
 
         <!-- Generate Button -->
-        <div class="flex flex-col items-center gap-4">
-          <button
-            id="generate-btn"
-            class="px-8 py-4 bg-primary text-white font-semibold rounded-xl shadow-lg hover:bg-primary-hover hover:shadow-xl transition-all transform hover:-translate-y-0.5"
-          >
+        <div class="flex flex-col items-center gap-6">
+          <button id="generate-btn" class="btn-primary flex items-center gap-3 text-lg">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
             Generate PDF Statement
           </button>
-          <p class="text-sm text-text-secondary">
-            Your accountant-ready statement will be downloaded automatically
+          <p class="text-sm text-text-muted flex items-center gap-2">
+            <svg class="w-4 h-4 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Your statement will download automatically
           </p>
         </div>
       </div>
 
       <!-- Error State -->
       <div id="error-state" class="hidden">
-        <div class="bg-error-light border border-error rounded-xl p-8 text-center">
-          <div class="w-12 h-12 rounded-full bg-error/10 flex items-center justify-center mx-auto mb-4">
-            <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-            </svg>
+        <div class="max-w-lg mx-auto">
+          <div class="bg-white rounded-3xl border-2 border-error/20 p-10 text-center shadow-xl shadow-error/5">
+            <div class="w-16 h-16 rounded-2xl bg-error-light flex items-center justify-center mx-auto mb-6">
+              <svg class="w-8 h-8 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+              </svg>
+            </div>
+            <h3 id="error-title" class="font-display text-xl font-bold text-error mb-3">Error</h3>
+            <p id="error-message" class="text-text-secondary mb-8 leading-relaxed">Something went wrong</p>
+            <button
+              id="error-back-btn"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-border-light hover:bg-border text-text-primary font-semibold rounded-xl transition-colors"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+              </svg>
+              Try Again
+            </button>
           </div>
-          <h3 id="error-title" class="text-lg font-semibold text-error mb-2">Error</h3>
-          <p id="error-message" class="text-text-secondary mb-6">Something went wrong</p>
-          <button
-            id="error-back-btn"
-            class="px-6 py-2 bg-white border border-border rounded-lg text-text-primary hover:bg-surface transition-colors"
-          >
-            Try Again
-          </button>
         </div>
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-border bg-white mt-auto">
-      <div class="max-w-5xl mx-auto px-4 py-8">
+    <footer class="border-t border-border/50 bg-white/50 mt-auto relative z-10">
+      <div class="max-w-6xl mx-auto px-6 py-8">
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p class="text-sm text-text-secondary">
-            © {new Date().getFullYear()} Made by <a href="https://github.com/morozRed" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">morozRed</a>
+          <p class="text-sm text-text-muted">
+            &copy; {new Date().getFullYear()} Made with
+            <span class="text-error mx-1">&hearts;</span>
+            by <a href="https://github.com/morozRed" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline font-medium">morozRed</a>
           </p>
-          <p class="text-sm text-text-secondary">
+          <p class="text-xs text-text-muted">
             This tool does not calculate taxes. Not affiliated with Apple Inc.
           </p>
         </div>
@@ -238,6 +350,11 @@ import Layout from '../layouts/Layout.astro';
     uploadState.classList.toggle('hidden', state !== 'upload');
     previewState.classList.toggle('hidden', state !== 'preview');
     errorState.classList.toggle('hidden', state !== 'error');
+
+    // Add animation for preview state
+    if (state === 'preview') {
+      previewState.classList.add('animate-fade-in-up');
+    }
   }
 
   function showError(title: string, message: string) {
@@ -306,20 +423,29 @@ import Layout from '../layouts/Layout.astro';
     // Currency breakdown
     const currencyBreakdown = document.getElementById('currency-breakdown')!;
     currencyBreakdown.innerHTML = report.summary.byCurrency.map(c => `
-      <div class="flex items-center justify-between py-2 border-b border-border last:border-0">
-        <span class="font-medium text-text-primary">${c.currency}</span>
-        <span class="text-lg font-semibold text-primary">${formatCurrency(c.totalProceeds, c.currency)}</span>
+      <div class="flex items-center justify-between p-4 rounded-xl bg-border-light/50 hover:bg-border-light transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-lg bg-white border border-border flex items-center justify-center font-mono font-bold text-sm text-text-primary">${c.currency}</span>
+          <span class="text-text-secondary">${c.totalQuantity} units</span>
+        </div>
+        <span class="text-xl font-bold text-text-primary font-display">${formatCurrency(c.totalProceeds, c.currency)}</span>
       </div>
     `).join('');
 
     // Country breakdown table
     const countryTableBody = document.getElementById('country-table-body')!;
     countryTableBody.innerHTML = report.summary.byCountry.map(c => `
-      <tr class="border-b border-border last:border-0">
-        <td class="py-3 text-text-primary">${c.countryOfSale}</td>
-        <td class="py-3 text-text-secondary">${c.currency}</td>
-        <td class="py-3 text-text-primary text-center">${c.quantity}</td>
-        <td class="py-3 text-text-primary text-right font-medium">${formatCurrency(c.proceeds, c.currency)}</td>
+      <tr class="table-row border-b border-border-light last:border-0">
+        <td class="py-4">
+          <span class="font-semibold text-text-primary">${c.countryOfSale}</span>
+        </td>
+        <td class="py-4">
+          <span class="px-2 py-1 rounded-md bg-border-light text-xs font-mono font-medium text-text-secondary">${c.currency}</span>
+        </td>
+        <td class="py-4 text-text-primary text-center font-medium">${c.quantity}</td>
+        <td class="py-4 text-right">
+          <span class="font-bold text-text-primary">${formatCurrency(c.proceeds, c.currency)}</span>
+        </td>
       </tr>
     `).join('');
   }
@@ -329,16 +455,16 @@ import Layout from '../layouts/Layout.astro';
 
   dropZone.addEventListener('dragover', (e) => {
     e.preventDefault();
-    dropZone.classList.add('border-primary', 'bg-primary-light/20');
+    dropZone.querySelector('.bg-white')?.classList.add('bg-primary-light/30');
   });
 
   dropZone.addEventListener('dragleave', () => {
-    dropZone.classList.remove('border-primary', 'bg-primary-light/20');
+    dropZone.querySelector('.bg-white')?.classList.remove('bg-primary-light/30');
   });
 
   dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
-    dropZone.classList.remove('border-primary', 'bg-primary-light/20');
+    dropZone.querySelector('.bg-white')?.classList.remove('bg-primary-light/30');
 
     const file = e.dataTransfer?.files[0];
     if (file) {
