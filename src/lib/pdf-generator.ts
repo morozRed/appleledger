@@ -296,9 +296,9 @@ function addProductBreakdown(
   yPos += 8;
 
   const productData = report.summary.byProduct.map((p) => {
-    // Stack each currency on its own line for better readability
+    // Bullet point per currency for clear multi-currency display
     const proceedsStr = Object.entries(p.proceedsByCurrency)
-      .map(([currency, amount]) => formatCurrency(amount, currency))
+      .map(([currency, amount]) => `• ${formatCurrency(amount, currency)}`)
       .join('\n');
     return [p.title, p.sku, p.quantity.toString(), proceedsStr];
   });
